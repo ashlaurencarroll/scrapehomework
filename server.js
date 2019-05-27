@@ -50,7 +50,11 @@ app.get("/scrape", function(req, res) {
       result.link = $(this)
         .children("a")
         .attr("href");
+        result.summary =$(this)
+        .children("h2")
+        .text();
 
+        
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function(dbArticle) {
@@ -61,6 +65,7 @@ app.get("/scrape", function(req, res) {
           // If an error occurred, log it
           console.log(err);
         });
+        
     });
 
     // Send a message to the client
